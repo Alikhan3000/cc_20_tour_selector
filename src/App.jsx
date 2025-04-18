@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-
+import Gallery from './components/Gallery'; // Import the Gallery component
+import DestinationSelector from './components/DestinationSelector'; // Import the DestinationSelector component
 // App Component
 const App = () => {
   const [tours, setTours] = useState([]); // State to store tour data
