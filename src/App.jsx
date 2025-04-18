@@ -6,14 +6,14 @@ const App = () => {
   const [tours, setTours] = useState([]); // State to store tour data
   const [loading, setLoading] = useState(true); // Tracks whether data is being loaded
   const [error, setError] = useState(null); // Stores any error messages from the API
-  const [filter, setFilter] = useState(''); // Stores the filter input for searching tours
+  const [selectedDestination, setSelectedDestination] = useState("All Destinations"); // Stores the filter input for searching tours
 
   useEffect(() => {
     // Fetches tour data from the API, handles loading state, and manages errors
     const fetchTours = async () => {
       setLoading(true);
       try {
-        const response = await fetch('https://course-api.com/react-tours-project');
+        const response = await fetch('https://api.allorigins.win/raw?url=https://course-api.com/react-tours-project');
         if (!response.ok) throw new Error('Failed to fetch tours');
         const data = await response.json();
         setTours(data);
@@ -28,9 +28,9 @@ const App = () => {
     fetchTours();
   }, []);
 
-  const filteredTours = tours.filter((tour) =>
-    tour.name.toLowerCase().includes(filter.toLowerCase()) // Filters tours based on the search input
-  );
+  // const filteredTours = tours.filter((tour) =>
+  //   tour.name.toLowerCase().includes(filter.toLowerCase()) // Filters tours based on the search input
+  // );
 
   return (
     <div className="App">
@@ -38,7 +38,7 @@ const App = () => {
       <DestinationSelector
         tours={tours} // Passes tour data to the DestinationSelector component
         selected={selectedDestination} // Passes the currently selected destination
-        onCharge={setSelectedDestination} // Updates the selected destination
+        onChange={setSelectedDestination} // Updates the selected destination
       />
       <Gallery
         tours={tours} // Passes tour data to the Gallery component
@@ -50,4 +50,4 @@ const App = () => {
     </div>
   );
 };
-export default Gallery;
+export default App;

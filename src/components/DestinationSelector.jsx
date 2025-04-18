@@ -1,29 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 
 const DestinationSelector = ({ tours, selected, onChange }) => {
-    const tours = [...new Set(tours.map((tour) => tour.name))]; // Extract unique tour names
-    const options = ["All Destinations", ...tours]; // Add "All Destinations" option
+    const optionsTours = [...new Set(tours.map((tour) => tour.name))]; // Extract unique tour names
+    const options = ["All Destinations", ...optionsTours]; // Add "All Destinations" option
    
     const handleChange = (event) => {
-        const newDestination = event.target.value;
-        setSelectedDestination(newDestination);
-        onChange(newDestination); // Pass the selected destination up to App.jsx
-    };
-
-    // Extract unique tour names
-    const uniqueTours = [...new Set(tours.map((tour) => tour.name))];
+        const selectedValue = event.target.value; // Get the selected value from the dropdown
+        onChange(selectedValue); // Update the selected destination in the parent component
+    }
+   
     return (
         <div>
             <label htmlFor="destination-select">Select a Destination:</label>
             <select
                 id="destination-select"
-                value={selectedDestination}
+                value={selected}
                 onChange={handleChange}
             >
                 <option value="All Destinations">
                     -- Choose a destination --
                 </option>
-                {uniqueTours.map((tour) => (
+                {options.map((tour) => (
                     <option key={tour} value={tour}>
                         {tour}
                     </option>

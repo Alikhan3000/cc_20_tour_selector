@@ -1,5 +1,6 @@
 import React from "react";
-import Tour from "./Tour"; // Import the Tour component
+
+import TourCard from "./TourCard"; // Import the Tour component
 
 const Gallery = ({ tours, selectedDestination, setTours, loading, error }) => {
     const filteredTours = selectedDestination === "All Destinations"
@@ -37,9 +38,13 @@ const Gallery = ({ tours, selectedDestination, setTours, loading, error }) => {
     return (
         <div className="gallery">
             {filteredTours.map((tour) => (
-                <Tour
+                <TourCard
                     key={tour.id}
-                    tour={tour} // Pass the individual tour object to the Tour component
+                    id={tour.id} // Unique key for each tour card
+                    name={tour.name} // Tour name
+                    image={tour.image} // Tour image URL
+                    info={tour.info} // Tour information
+                    price={tour.price} // Tour price
                     onNotInterested={handleNotInterested} // Pass the function to handle "Not Interested" action
                 />
             ))}
